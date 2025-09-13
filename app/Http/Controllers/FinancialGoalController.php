@@ -19,7 +19,7 @@ class FinancialGoalController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return Inertia::render('FinancialGoals/Index', [
+        return Inertia::render('App/FinancialGoals/Index', [
             'goals' => $user->financialGoals()->orderBy('target_date')->get(),
             // Kirim juga daftar akun untuk form "Tambah Tabungan"
             'accounts' => $user->accounts()->where('is_active', true)->get(['id', 'name', 'balance']),

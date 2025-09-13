@@ -59,7 +59,7 @@ class BudgetController extends Controller
             ];
         });
 
-        return Inertia::render('Budgets/Index', [
+        return Inertia::render('App/Budgets/Index', [
             'budgetData' => $budgetData,
             'filters' => [
                 'month' => (int)$month,

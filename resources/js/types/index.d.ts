@@ -17,6 +17,12 @@ export interface NavItem {
     isActive?: boolean;
 }
 
+   export interface NavItemGroup {
+    title?: string; // Judul grup bersifat opsional
+    icon?: LucideIcon; // Menambahkan ikon untuk judul grup
+    items: NavItem[];
+}
+
 export type AppPageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     name: string;
     quote: { message: string; author: string };

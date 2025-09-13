@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Categories/Index', [
+        return Inertia::render('App/Categories/Index', [
             'categories' => Auth::user()->categories()
                 ->withCount('transactions') // Menghitung jumlah transaksi terkait
                 ->orderBy('name')

@@ -6,9 +6,12 @@ use App\RecurrenceFrequency;
 use App\TransactionType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class RecurringTransaction extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'user_id',
         'account_id',

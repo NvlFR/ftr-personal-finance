@@ -48,16 +48,16 @@ class Transaction extends Model
     /**
      * Relasi ke model Category: Setiap transaksi masuk dalam satu kategori.
      */
-    // public function category(): BelongsTo
-    // {
-    //     return $this->belongsTo(Category::class);
-    // }
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     /**
      * Relasi ke model Account (Dompet): Setiap transaksi berasal dari/masuk ke satu akun.
      */
-    // public function account(): BelongsTo
-    // {
-    //     return $this->belongsTo(Account::class);
-    // }
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo(Account::class);
+    }
 }

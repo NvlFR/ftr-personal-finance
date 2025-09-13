@@ -13,7 +13,7 @@ class RecurringTransactionController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return Inertia::render('RecurringTransactions/Index', [
+        return Inertia::render('App/RecurringTransactions/Index', [
             'recurringTransactions' => $user->recurringTransactions()->with(['account', 'category'])->latest()->get(),
             'accounts' => $user->accounts()->where('is_active', true)->get(['id', 'name']),
             'categories' => $user->categories()->orderBy('name')->get(['id', 'name', 'type']),

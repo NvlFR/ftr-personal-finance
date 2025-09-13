@@ -38,7 +38,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // --- Transaksi & Kategori ---
     Route::resource('transactions', TransactionController::class);
+    Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
+    Route::get('/transactions/create', [TransactionController::class, 'create'])->name('transactions.create');
+    Route::get('/transactions/{transaction}', [TransactionController::class, 'show'])->name('transactions.show');
+    Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
+
+
     Route::resource('categories', CategoryController::class)->except(['show', 'create', 'edit']);
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
 
     // --- Manajemen Dompet/Akun ---
     Route::resource('accounts', AccountController::class)->except(['show']);

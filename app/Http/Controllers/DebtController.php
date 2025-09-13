@@ -16,7 +16,7 @@ class DebtController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return Inertia::render('Debts/Index', [
+        return Inertia::render('App/Debts/Index', [
             'debts' => $user->debts()->with('party')->latest()->get(),
             'parties' => $user->parties()->orderBy('name')->get(['id', 'name']),
             'accounts' => $user->accounts()->where('is_active', true)->get(['id', 'name', 'balance']),

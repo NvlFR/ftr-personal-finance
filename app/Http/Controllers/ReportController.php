@@ -59,7 +59,7 @@ class ReportController extends Controller
             ->get();
 
         // --- 5. Mengirim Semua Data ke Inertia ---
-        return Inertia::render('Reports/Index', [
+        return Inertia::render('App/Reports/Index', [
             'reports' => [
                 'cashFlow' => [
                     'income' => $totalIncome,
