@@ -4,6 +4,24 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, ArrowUpRight, ArrowDownLeft, Pencil } from 'lucide-vue-next';
 import { Link } from '@inertiajs/vue3';
+import AppLayout from '@/layouts/AppLayout.vue';
+import { type BreadcrumbItem } from '@/types';
+import { Head } from '@inertiajs/vue3';
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Transaksi',
+        href: '/transactions',
+    },
+    {
+        title: 'Tambah Transaksi',
+        href: '/transactions/create',
+    },
+    {
+        title: 'Detail Transaksi',
+        href: '/transactions/1', // Ganti dengan ID dinamis jika perlu
+    },
+];
+
 
 // Tipe data sama seperti di halaman Index
 interface Category {
@@ -56,6 +74,9 @@ const formatCurrency = (value: string) => {
 </script>
 
 <template>
+    <Head title="Detail Transaksi" />
+
+    <AppLayout :breadcrumbs="breadcrumbs">
     <div class="p-6 max-w-2xl mx-auto space-y-6">
         <div class="flex items-center justify-between">
             <Button variant="outline" as-child>
@@ -116,4 +137,5 @@ const formatCurrency = (value: string) => {
             </CardContent>
         </Card>
     </div>
+    </AppLayout>
 </template>

@@ -44,8 +44,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
 
 
-    Route::resource('categories', CategoryController::class)->except(['show', 'create', 'edit']);
-    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::resource('categories', CategoryController::class);
 
     // --- Manajemen Dompet/Akun ---
     Route::resource('accounts', AccountController::class)->except(['show']);

@@ -22,8 +22,12 @@ import { Head } from '@inertiajs/vue3';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
+        title: 'Transaksi',
+        href: '/transactions',
+    },
+    {
         title: 'Tambah Transaksi',
-        href: 'transactions/create',
+        href: '/transactions/create',
     },
 ];
 

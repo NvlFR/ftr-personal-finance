@@ -6,6 +6,19 @@ import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { ArrowLeft } from 'lucide-vue-next';
 import { Link, useForm } from '@inertiajs/vue3';
+import AppLayout from '@/layouts/AppLayout.vue';
+import { type BreadcrumbItem } from '@/types';
+import { Head } from '@inertiajs/vue3';
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Kategori',
+        href: '/categories',
+    },
+    {
+        title: 'Buat Kategori',
+        href: '/categories/create',
+    },
+];
 
 // Menggunakan useForm dari Inertia untuk state management
 const form = useForm({
@@ -22,6 +35,8 @@ const submit = () => {
 </script>
 
 <template>
+    <Head title="Transaksi" />
+    <AppLayout :breadcrumbs="breadcrumbs">
     <div class="p-6 max-w-2xl mx-auto">
         <div class="mb-6">
              <Button variant="outline" as-child>
@@ -76,4 +91,5 @@ const submit = () => {
             </CardContent>
         </Card>
     </div>
+    </AppLayout>
 </template>

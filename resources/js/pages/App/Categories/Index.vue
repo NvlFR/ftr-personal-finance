@@ -6,6 +6,15 @@ import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { MoreHorizontal, PlusCircle, Pencil, Trash2 } from 'lucide-vue-next';
 import { Link } from '@inertiajs/vue3';
+import AppLayout from '@/layouts/AppLayout.vue';
+import { type BreadcrumbItem } from '@/types';
+import { Head } from '@inertiajs/vue3';
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Kategori',
+        href: '/categories',
+    },
+];
 
 // Tipe data berdasarkan struktur dari backend
 interface Category {
@@ -13,7 +22,7 @@ interface Category {
   user_id: number;
   name: string;
   icon: string;
-  type: 'income' | 'expense';
+  type: 'income' | 'expense';   
   created_at: string;
   updated_at: string;
   transactions_count: number;
@@ -63,6 +72,8 @@ const categories = props.categories && props.categories.length > 0 ? props.categ
 </script>
 
 <template>
+    <Head title="Kategori" />
+    <AppLayout :breadcrumbs="breadcrumbs">
     <div class="p-6 space-y-6">
         <div class="flex items-center justify-between">
             <div>
@@ -131,4 +142,5 @@ const categories = props.categories && props.categories.length > 0 ? props.categ
             </CardContent>
         </Card>
     </div>
+    </AppLayout>
 </template>

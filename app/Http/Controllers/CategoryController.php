@@ -25,6 +25,15 @@ class CategoryController extends Controller
     }
 
     /**
+     * Menampilkan form tambah kategori.
+     */
+    public function create()
+    {
+        return Inertia::render('App/Categories/Create');
+    }
+
+
+    /**
      * Menyimpan kategori baru.
      */
     public function store(Request $request)
