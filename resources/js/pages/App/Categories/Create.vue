@@ -9,6 +9,8 @@ import { Link, useForm } from '@inertiajs/vue3';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
+
+
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Kategori',
@@ -28,9 +30,9 @@ const form = useForm({
 });
 
 const submit = () => {
-    // Logika untuk mengirim data ke backend
-    // form.post('/categories');
-    console.log('Form data submitted:', form.data());
+    // Mengirim data form ke rute 'categories.store'
+    // Menggunakan helper route() dari Ziggy untuk menghindari hardcoding URL
+    form.post(route('categories.store'));
 };
 </script>
 
@@ -40,7 +42,7 @@ const submit = () => {
     <div class="p-6 max-w-2xl mx-auto">
         <div class="mb-6">
              <Button variant="outline" as-child>
-                <Link href="/categories">
+                <Link :href="route('categories.index')">
                     <ArrowLeft class="w-4 h-4 mr-2" />
                     Kembali ke Daftar Kategori
                 </Link>
@@ -83,7 +85,7 @@ const submit = () => {
 
                     <div class="flex justify-end gap-2 pt-4">
                         <Button variant="outline" as-child>
-                            <Link href="/categories">Batal</Link>
+                            <Link :href="route('categories.index')">Batal</Link>
                         </Button>
                         <Button type="submit">Simpan Kategori</Button>
                     </div>

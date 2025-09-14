@@ -21,6 +21,14 @@ class AccountController extends Controller
     }
 
     /**
+     * Menampilkan form tambah akun.
+     */
+    public function create()
+    {
+        return Inertia::render('App/Accounts/Create');
+    }
+
+    /**
      * Menyimpan akun baru.
      */
     public function store(Request $request)

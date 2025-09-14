@@ -43,7 +43,17 @@ class FinancialGoalController extends Controller
         return redirect()->route('financial-goals.index')->with('success', 'Goal berhasil dibuat.');
     }
 
-    // ... metode update() dan destroy() bisa Anda tambahkan dengan pola yang sama ...
+        /**
+     * Menampilkan form untuk membuat goal baru.
+     */
+    public function create()
+    {
+        $user = Auth::user();
+        return Inertia::render('App/FinancialGoals/Create', [
+            // Tambahkan baris ini untuk mengirim data akun
+            'accounts' => $user->accounts()->where('is_active', true)->get(['id', 'name']),
+        ]);
+    }
 
     /**
      * Menambahkan tabungan ke sebuah goal.

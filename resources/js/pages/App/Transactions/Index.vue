@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import AppLayout from '@/layouts/AppLayout.vue';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { type BreadcrumbItem } from '@/types';
-import { Head, Link } from '@inertiajs/vue3';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { ArrowUpRight, ArrowDownLeft, MoreHorizontal, PlusCircle, Eye, Pencil, Trash2 } from 'lucide-vue-next';
-import { ref } from 'vue'
+import AppLayout from '@/layouts/AppLayout.vue'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { type BreadcrumbItem } from '@/types'
+import { Head, Link, usePage} from '@inertiajs/vue3'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { ArrowUpRight, ArrowDownLeft, MoreHorizontal, PlusCircle, Eye, Pencil, Trash2 } from 'lucide-vue-next'
+import { computed } from 'vue'
+
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -17,59 +18,33 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-// Tipe data berdasarkan struktur dari backend
+
 interface Category {
-  id: number;
-  name: string;
-  icon: string;
+  id: number
+  name: string
+  icon: string
 }
 
 interface Account {
-  id: number;
-  name: string;
-  current_balance: string;
+  id: number
+  name: string
+  current_balance: string
 }
 
 interface Transaction {
-  id: number;
-  type: 'income' | 'expense';
-  amount: string;
-  description: string;
-  transaction_date: string;
-  category: Category;
-  account: Account;
+  id: number
+  type: 'income' | 'expense'
+  amount: string
+  description: string
+  transaction_date: string
+  category: Category
+  account: Account
 }
+const page = usePage() as { props: { transactions: { data: Transaction[] } } }
+const transactions = computed<Transaction[]>(() => page.props.transactions.data)
 
-// Data tiruan (mock data) untuk halaman index
-const transactions = ref<Transaction[]>([
-  {
-    id: 1,
-    type: "expense",
-    amount: "50000.00",
-    description: "Makan siang di warteg",
-    transaction_date: "2025-09-12",
-    category: { id: 3, name: "Makanan & Minuman", icon: "🍔" },
-    account: { id: 1, name: "Dompet Tunai", current_balance: "150000.00" }
-  },
-  {
-    id: 2,
-    type: "income",
-    amount: "2500000.00",
-    description: "Gaji bulanan",
-    transaction_date: "2025-09-01",
-    category: { id: 1, name: "Gaji", icon: "💰" },
-    account: { id: 2, name: "Rekening Bank", current_balance: "10000000.00" }
-  },
-  {
-    id: 3,
-    type: "expense",
-    amount: "75000.00",
-    description: "Beli bensin motor",
-    transaction_date: "2025-09-10",
-    category: { id: 2, name: "Transportasi", icon: "🚗" },
-    account: { id: 1, name: "Dompet Tunai", current_balance: "150000.00" }
-  },
-]);
+
+
 
 // Fungsi untuk format mata uang
 const formatCurrency = (value: string) => {

@@ -37,7 +37,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // --- Transaksi & Kategori ---
-    Route::resource('transactions', TransactionController::class);
+    // Route::resource('transactions', TransactionController::class);
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
     Route::get('/transactions/create', [TransactionController::class, 'create'])->name('transactions.create');
     Route::get('/transactions/{transaction}', [TransactionController::class, 'show'])->name('transactions.show');
@@ -50,12 +50,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('accounts', AccountController::class)->except(['show']);
 
     // --- Budgeting & Laporan ---
-    Route::get('/budgets', [BudgetController::class, 'index'])->name('budgets.index');
-    Route::post('/budgets', [BudgetController::class, 'store'])->name('budgets.store');
-    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::resource('budgets', BudgetController::class);
 
     // --- Financial Goals ---
-    Route::post('/financial-goals/{financialGoal}/add-savings', [FinancialGoalController::class, 'addSavings'])->name('financial-goals.add-savings');
+    // Route::post('/financial-goals/{financialGoal}/add-savings', [FinancialGoalController::class, 'addSavings'])->name('financial-goals.add-savings');
     Route::resource('financial-goals', FinancialGoalController::class);
 
     // --- Utang & Piutang ---

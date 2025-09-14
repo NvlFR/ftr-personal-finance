@@ -6,7 +6,9 @@ import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
 import { initializeTheme } from './composables/useAppearance';
 import { ZiggyVue } from "ziggy-js";
-import { Ziggy } from "./ziggy";
+
+// eslint-disable-next-line no-var
+declare var Ziggy: any;
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -16,7 +18,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
-            .use(ZiggyVue, Ziggy) 
+            .use(ZiggyVue, Ziggy)
             .mount(el);
     },
     progress: {
@@ -24,5 +26,4 @@ createInertiaApp({
     },
 });
 
-// This will set light / dark mode on page load...
 initializeTheme();

@@ -14,15 +14,12 @@ import {
     Eye,
     Pencil,
     Trash2,
-    DollarSign,
-    Target
 } from 'lucide-vue-next';
-import { ref } from 'vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Sasaran Keuangan',
-        href: 'goals',
+        href: 'financial-goals',
     },
 ];
 
@@ -94,7 +91,7 @@ const getStatusText = (status: string) => {
                     <p class="text-muted-foreground">Rencanakan dan pantau kemajuan sasaran finansial Anda.</p>
                 </div>
                 <Button as-child>
-                    <Link :href="route('goals.create')">
+                    <Link :href="route('financial-goals.create')">
                         <PlusCircle class="w-4 h-4 mr-2" />
                         Buat Sasaran Baru
                     </Link>
@@ -145,12 +142,12 @@ const getStatusText = (status: string) => {
                                         </DropdownMenuTrigger>
                                         <DropdownMenuContent>
                                             <DropdownMenuItem as-child>
-                                                <Link :href="route('goals.show', goal.id)" class="flex items-center">
+                                                <Link :href="route('financial-goals.show', goal.id)" class="flex items-center">
                                                     <Eye class="w-4 h-4 mr-2" />Lihat
                                                 </Link>
                                             </DropdownMenuItem>
                                             <DropdownMenuItem as-child>
-                                                <Link :href="route('goals.edit', goal.id)" class="flex items-center">
+                                                <Link :href="route('financial-goals.edit', goal.id)" class="flex items-center">
                                                     <Pencil class="w-4 h-4 mr-2" />Edit
                                                 </Link>
                                             </DropdownMenuItem>

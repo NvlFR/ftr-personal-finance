@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import { dashboard } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
@@ -128,14 +128,13 @@ const formatDate = (dateString: string) => {
 
 // Simulasikan data yang hilang untuk melihat efeknya
 // const hasGoals = computed(() => props.activeGoals && props.activeGoals.length > 0);
-</script>
+</script> -->
 
-<template>
+<!-- <template>
     <Head title="Dashboard" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col gap-4 overflow-x-auto p-4">
-            <!-- Summary Cards -->
             <div class="grid auto-rows-min gap-4 md:grid-cols-3">
                 <div class="rounded-xl border border-gray-300 dark:border-gray-700 p-6 shadow-md flex items-center justify-between">
                     <div>
@@ -167,7 +166,6 @@ const formatDate = (dateString: string) => {
             </div>
 
             <div class="grid lg:grid-cols-3 gap-4">
-                <!-- Latest Transactions Widget -->
                 <div class="lg:col-span-2 rounded-xl border border-gray-300 dark:border-gray-700 p-6 shadow-md">
                     <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Aktivitas Terakhir</h3>
                     <ul v-if="latestTransactions.length" class="space-y-4">
@@ -191,7 +189,6 @@ const formatDate = (dateString: string) => {
                     </div>
                 </div>
 
-                <!-- Account Balances Widget -->
                 <div class="rounded-xl border border-gray-300 dark:border-gray-700 p-6 shadow-md">
                     <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Saldo Akun</h3>
                     <ul v-if="accounts.length" class="space-y-4">
@@ -210,7 +207,6 @@ const formatDate = (dateString: string) => {
             </div>
 
             <div class="grid lg:grid-cols-2 gap-4">
-                <!-- Financial Goals Widget -->
                 <div class="rounded-xl border border-gray-300 dark:border-gray-700 p-6 shadow-md">
                     <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Tujuan Keuangan Aktif</h3>
                     <ul v-if="activeGoals.length" class="space-y-6">
@@ -235,8 +231,7 @@ const formatDate = (dateString: string) => {
                         Tidak ada tujuan keuangan aktif.
                     </div>
                 </div>
-                
-                <!-- Expense Chart Widget -->
+
                 <div class="rounded-xl border border-gray-300 dark:border-gray-700 p-6 shadow-md">
                     <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Grafik Pengeluaran (7 Hari Terakhir)</h3>
                     <div class="h-64">
@@ -250,8 +245,46 @@ const formatDate = (dateString: string) => {
             </div>
         </div>
     </AppLayout>
-</template>
+</template> -->
 
-<style scoped>
+<!-- <style scoped>
 /* Anda bisa menambahkan gaya kustom di sini jika diperlukan */
-</style>
+</style> -->
+
+<script setup lang="ts">
+import AppLayout from '@/layouts/AppLayout.vue';
+import { dashboard } from '@/routes';
+import { type BreadcrumbItem } from '@/types';
+import { Head } from '@inertiajs/vue3';
+import PlaceholderPattern from '../components/PlaceholderPattern.vue';
+
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Dashboard',
+        href: dashboard().url,
+    },
+];
+</script>
+
+<template>
+    <Head title="Dashboard" />
+
+    <AppLayout :breadcrumbs="breadcrumbs">
+        <div class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
+            <div class="grid auto-rows-min gap-4 md:grid-cols-3">
+                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
+                    <PlaceholderPattern />
+                </div>
+                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
+                    <PlaceholderPattern />
+                </div>
+                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
+                    <PlaceholderPattern />
+                </div>
+            </div>
+            <div class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border">
+                <PlaceholderPattern />
+            </div>
+        </div>
+    </AppLayout>
+</template>

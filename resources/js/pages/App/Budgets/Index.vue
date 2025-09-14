@@ -2,13 +2,11 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/vue3';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { MoreHorizontal, PlusCircle, Eye, Pencil, Trash2 } from 'lucide-vue-next';
-import { ref } from 'vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -66,7 +64,7 @@ const getMonthName = (monthNumber: number) => {
                     </p>
                 </div>
                 <Button as-child>
-                    <Link href="/budgets/create">
+                    <Link :href="route('budgets.create')">
                         <PlusCircle class="w-4 h-4 mr-2" />
                         Buat Budget Baru
                     </Link>

@@ -10,6 +10,7 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
 
+
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Budgeting',
@@ -28,23 +29,34 @@ interface Category {
     type: 'income' | 'expense';
 }
 
-interface Account {
-    id: number;
-    name: string;
-    current_balance: string;
-}
-
 const props = defineProps<{
     categories: Category[];
 }>();
 
 const form = useForm({
-    budgeted_amount: undefined as number | undefined,
-    category_id: undefined as number | undefined,
+    // Sesuaikan form untuk mengirimkan data dalam bentuk array yang diharapkan backend
+    budgets: [
+        {
+            category_id: undefined as number | undefined,
+            amount: undefined as number | undefined,
+        },
+    ],
+    // Tambahkan bulan dan tahun saat ini
+    month: new Date().getMonth() + 1,
+    year: new Date().getFullYear(),
 });
 
 const submit = () => {
-    // Sesuaikan dengan route Inertia Anda
+    // console.log('Form data:', form.data());
+
+    // Pastikan form.budgets.amount dan form.budgets.category_id tidak undefined
+    // Karena form.post mengharapkan kedua field tersebut terisi
+    if (form.budgets[0].category_id === undefined || form.budgets[0].amount === undefined) {
+      console.error('Category and amount must be selected.');
+      return;
+    }
+
+    // Kirim data ke rute 'budgets.store'
     form.post(route('budgets.store'));
 };
 </script>
@@ -61,7 +73,8 @@ const submit = () => {
                     </Link>
                 </Button>
             </div>
-
+<div v-if="form.errors.month" class="text-red-500 text-xs mt-1">{{ form.errors.month }}</div>
+<div v-if="form.errors.year" class="text-red-500 text-xs mt-1">{{ form.errors.year }}</div>
             <Card>
                 <CardHeader>
                     <CardTitle>Buat Budget Baru</CardTitle>
@@ -71,7 +84,7 @@ const submit = () => {
                     <form @submit.prevent="submit" class="space-y-6">
                         <div class="space-y-2">
                             <Label for="category">Kategori</Label>
-                            <Select v-model="form.category_id">
+                            <Select v-model="form.budgets[0].category_id">
                                 <SelectTrigger>
                                     <SelectValue placeholder="Pilih kategori pengeluaran" />
                                 </SelectTrigger>
@@ -81,14 +94,17 @@ const submit = () => {
                                     </SelectItem>
                                 </SelectContent>
                             </Select>
-                            <div v-if="form.errors.category_id" class="text-red-500 text-xs mt-1">{{ form.errors.category_id }}</div>
+                            <div v-if="form.errors['budgets.0.category_id']" class="text-red-500 text-xs mt-1">{{ form.errors['budgets.0.category_id'] }}</div>
                         </div>
 
                         <div class="space-y-2">
                             <Label for="amount">Jumlah Anggaran</Label>
-                            <Input id="amount" v-model="form.budgeted_amount" type="number" placeholder="Contoh: 1500000" required />
-                            <div v-if="form.errors.budgeted_amount" class="text-red-500 text-xs mt-1">{{ form.errors.budgeted_amount }}</div>
+                            <Input id="amount" v-model="form.budgets[0].amount" type="number" placeholder="Contoh: 1500000" required />
+                            <div v-if="form.errors['budgets.0.amount']" class="text-red-500 text-xs mt-1">{{ form.errors['budgets.0.amount'] }}</div>
                         </div>
+
+                        <input type="hidden" v-model="form.month">
+                        <input type="hidden" v-model="form.year">
 
                         <div class="flex justify-end gap-2 pt-4">
                             <Button variant="outline" as-child type="button">

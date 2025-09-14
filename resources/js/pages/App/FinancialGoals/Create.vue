@@ -18,11 +18,13 @@ import { type BreadcrumbItem } from '@/types';
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Sasaran Keuangan',
-        href: '/goals',
+        // Perubahan di sini
+        href: '/financial-goals',
     },
     {
         title: 'Buat Sasaran',
-        href: '/goals/create',
+        // Perubahan di sini
+        href: '/financial-goals/create',
     },
 ];
 
@@ -45,7 +47,17 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('goals.store'));
+    // Buat salinan data form
+    const formData = form.data();
+
+    // Periksa apakah target_date ada dan merupakan instance dari Date
+    if (formData.target_date instanceof Date) {
+        // Format tanggal ke string 'YYYY-MM-DD'
+        formData.target_date = format(formData.target_date, 'yyyy-MM-dd');
+    }
+
+    // Kirim data yang sudah dimodifikasi
+    form.post(route('financial-goals.store'), formData);
 };
 </script>
 
@@ -55,7 +67,7 @@ const submit = () => {
         <div class="p-4 sm:p-6 max-w-3xl mx-auto">
             <div class="mb-6">
                 <Button variant="outline" as-child>
-                    <Link :href="route('goals.index')">
+                    <Link :href="route('financial-goals.index')">
                         <ArrowLeft class="w-4 h-4 mr-2" />
                         Kembali ke Daftar Sasaran
                     </Link>
@@ -133,7 +145,7 @@ const submit = () => {
 
                         <div class="flex justify-end gap-2 pt-4">
                             <Button variant="outline" as-child type="button">
-                                <Link :href="route('goals.index')">Batal</Link>
+                                <Link :href="route('financial-goals.index')">Batal</Link>
                             </Button>
                             <Button type="submit" :disabled="form.processing">Simpan Sasaran</Button>
                         </div>

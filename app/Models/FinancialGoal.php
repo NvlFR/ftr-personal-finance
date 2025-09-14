@@ -29,6 +29,9 @@ class FinancialGoal extends Model
         'status' => GoalStatus::class,
     ];
 
+    // Tambahkan baris ini
+    protected $appends = ['percentage'];
+
     /**
      * Relasi ke User
      */

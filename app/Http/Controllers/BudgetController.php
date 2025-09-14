@@ -68,6 +68,21 @@ class BudgetController extends Controller
         ]);
     }
 
+    public function create()
+{
+    // Anda bisa menambahkan logic untuk mengambil data yang diperlukan form
+    // Misal: daftar kategori
+    $categories = Auth::user()->categories()
+        ->where('type', \App\TransactionType::EXPENSE)
+        ->orderBy('name')
+        ->get();
+
+    return Inertia::render('App/Budgets/Create', [
+        'categories' => $categories,
+    ]);
+}
+
+
     /**
      * Menyimpan atau memperbarui data budget.
      */
@@ -98,6 +113,6 @@ class BudgetController extends Controller
             );
         }
 
-        return redirect()->back()->with('success', 'Budget berhasil disimpan.');
+        return redirect()->route('budgets.index')->with('success', 'Budget berhasil disimpan.');
     }
 }
