@@ -21,12 +21,11 @@ class FinancialGoalController extends Controller
         $user = Auth::user();
         return Inertia::render('App/FinancialGoals/Index', [
             'goals' => $user->financialGoals()->orderBy('target_date')->get(),
-            // Kirim juga daftar akun untuk form "Tambah Tabungan"
             'accounts' => $user->accounts()->where('is_active', true)->get(['id', 'name', 'balance']),
         ]);
     }
 
-    /**
+ /**
      * Menyimpan goal baru.
      */
     public function store(Request $request)
@@ -43,15 +42,30 @@ class FinancialGoalController extends Controller
         return redirect()->route('financial-goals.index')->with('success', 'Goal berhasil dibuat.');
     }
 
-        /**
+/**
      * Menampilkan form untuk membuat goal baru.
      */
     public function create()
     {
         $user = Auth::user();
         return Inertia::render('App/FinancialGoals/Create', [
-            // Tambahkan baris ini untuk mengirim data akun
             'accounts' => $user->accounts()->where('is_active', true)->get(['id', 'name']),
+        ]);
+    }
+
+    /**
+     * Menampilkan detail dari financial goal.
+     */
+    public function show(FinancialGoal $financialGoal)
+    {
+        // Pastikan goal ini milik user yang sedang login
+        $this->authorize('view', $financialGoal);
+
+        // Memuat ulang model dengan accessor yang diperlukan
+        $goal = $financialGoal->load('transactions'); // Contoh jika Anda ingin memuat relasi
+
+        return Inertia::render('App/FinancialGoals/Show', [
+            'goal' => $goal,
         ]);
     }
 

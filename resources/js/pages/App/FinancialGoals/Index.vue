@@ -124,7 +124,7 @@ const getStatusText = (status: string) => {
                                 <TableCell>
                                     <div class="flex items-center gap-2">
                                         <Progress :model-value="goal.percentage" class="w-[100px]" />
-                                        <span>{{ goal.percentage.toFixed(0) }}%</span>
+                                        <span>{{ goal.percentage?.toFixed(0) }}%</span>
                                     </div>
                                 </TableCell>
                                 <TableCell>{{ goal.target_date }}</TableCell>

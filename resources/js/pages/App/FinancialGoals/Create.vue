@@ -18,13 +18,13 @@ import { type BreadcrumbItem } from '@/types';
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Sasaran Keuangan',
-        // Perubahan di sini
-        href: '/financial-goals',
+        // Ganti dengan route() helper
+        href: route('financial-goals.index'),
     },
     {
         title: 'Buat Sasaran',
-        // Perubahan di sini
-        href: '/financial-goals/create',
+        // Ganti dengan route() helper
+        href: route('financial-goals.create'),
     },
 ];
 
@@ -41,23 +41,18 @@ const form = useForm({
     name: '',
     description: '',
     target_amount: undefined as number | undefined,
+    // Tetap gunakan Date untuk binding, dan format saat submit
     target_date: undefined as Date | undefined,
     initial_deposit: undefined as number | undefined,
     source_account_id: undefined as number | undefined,
 });
 
 const submit = () => {
-    // Buat salinan data form
-    const formData = form.data();
-
-    // Periksa apakah target_date ada dan merupakan instance dari Date
-    if (formData.target_date instanceof Date) {
-        // Format tanggal ke string 'YYYY-MM-DD'
-        formData.target_date = format(formData.target_date, 'yyyy-MM-dd');
+    // Gunakan cara ini, Inertia akan mengirimkan form yang sudah dimodifikasi
+    if (form.target_date) {
+        form.target_date = format(form.target_date, 'yyyy-MM-dd');
     }
-
-    // Kirim data yang sudah dimodifikasi
-    form.post(route('financial-goals.store'), formData);
+    form.post(route('financial-goals.store'));
 };
 </script>
 

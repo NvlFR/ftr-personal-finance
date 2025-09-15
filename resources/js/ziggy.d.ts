@@ -81,13 +81,30 @@ declare module 'ziggy-js' {
         }
     ],
     "budgets.index": [],
+    "budgets.create": [],
     "budgets.store": [],
-    "reports.index": [],
-    "financial-goals.add-savings": [
+    "budgets.show": [
         {
-            "name": "financialGoal",
-            "required": true,
-            "binding": "id"
+            "name": "budget",
+            "required": true
+        }
+    ],
+    "budgets.edit": [
+        {
+            "name": "budget",
+            "required": true
+        }
+    ],
+    "budgets.update": [
+        {
+            "name": "budget",
+            "required": true
+        }
+    ],
+    "budgets.destroy": [
+        {
+            "name": "budget",
+            "required": true
         }
     ],
     "financial-goals.index": [],
